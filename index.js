@@ -1,10 +1,12 @@
+// api/index.js
+
 require('dotenv').config();
 
 // 1. الاستيرادات أولاً
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const httpStatusText = require('./utils/httpStatusText');
+const httpStatusText = require('./utils/httpStatusText' );
 const path = require('path');
 
 
@@ -30,14 +32,12 @@ app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // 6. 404 Handler (في النهاية)
 app.use((req, res) => {
-    return res.status(404).json({status: httpStatusText.ERROR, message: "Route not found"});
+    return res.status(404).json({status: httpStatusText.ERROR, message: "Route not found"} );
 });
 app.use((error, req, res, next) => {
-    res.status(error.statusCode || 500).json({status:error.statusText || httpStatusText.ERROR, message: error.message, code: error.statusCode || 500, data: null})
+    res.status(error.statusCode || 500).json({status:error.statusText || httpStatusText.ERROR, message: error.message, code: error.statusCode || 500, data: null} )
 })
 
 
-// 7. تشغيل السيرفر
-app.listen(process.env.PORT || 5000, () => {
-    console.log('listening to port: 5000');
-});
+// 7. تصدير التطبيق (الخطوة الحاسمة لـ Vercel)
+module.exports = app; 
