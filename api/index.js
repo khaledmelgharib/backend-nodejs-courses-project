@@ -6,7 +6,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
-const httpStatusText = require('./utils/httpStatusText' );
+const httpStatusText = require('../utils/httpStatusText.js' );
 const path = require('path');
 
 
@@ -24,8 +24,8 @@ app.use(cors());
 app.use(express.json());
 
 // 5. المسارات (Routes)
-const coursesRouter = require('./rouets/courses.route.js'); 
-const usersRouter = require('./rouets/users.route .js'); 
+const coursesRouter = require('../rouets/courses.route.js'); 
+const usersRouter = require('../rouets/users.route .js'); 
 app.use('/', coursesRouter);  // (/api/courses)
 app.use('/api/users', usersRouter); // (/api/users)
 app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
